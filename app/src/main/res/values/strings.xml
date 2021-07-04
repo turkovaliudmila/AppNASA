@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">AppNASA</string>
     <string name="photo_of_the_day_stub">Photo of the day</string>
+    <string name="search_wiki">"wiki search "</string>
+    <string name="wiki_helper_text">search for terms in wiki</string>
+    <string name="error_link_is_empty">Error: link is empty</string>
+    <string name="button_ok">OK</string>
 </resources>
