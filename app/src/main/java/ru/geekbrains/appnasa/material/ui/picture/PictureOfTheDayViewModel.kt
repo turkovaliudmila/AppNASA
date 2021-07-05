@@ -7,6 +7,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.geekbrains.appnasa.BuildConfig
+import ru.geekbrains.appnasa.R
 
 class PictureOfTheDayViewModel(
     private val liveDataForViewToObserve: MutableLiveData<PictureOfTheDayData> = MutableLiveData(),
@@ -23,7 +24,7 @@ class PictureOfTheDayViewModel(
         liveDataForViewToObserve.value = PictureOfTheDayData.Loading(null)
         val apiKey: String = BuildConfig.NASA_API_KEY
         if (apiKey.isBlank()) {
-            PictureOfTheDayData.Error(Throwable("You need API key"))
+            PictureOfTheDayData.Error(Throwable("API key is empty"))
         } else {
             retrofitImpl.getRetrofitImpl().getPictureOfTheDay(apiKey).enqueue(object : Callback<PODServerResponseData> {
                 override fun onResponse(

@@ -8,4 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="loadingBackground">#27A9D2F3</color>
+    <color name="bottom_sheet_layout_background_color">#f6f6fa</color>
+    <color name="bottom_sheet_line_background_color">#663b4351</color>
+    <color name="bottom_sheet_description_header_text_color">#000</color>
 </resources>

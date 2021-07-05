@@ -5,4 +5,6 @@
     <string name="wiki_helper_text">search for terms in wiki</string>
     <string name="error_link_is_empty">Error: link is empty</string>
     <string name="button_ok">OK</string>
+    <string name="bottom_sheet_description_header_text_default">Title text</string>
+    <string name="bottom_sheet_description_text_default">Description</string>
 </resources>
