@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/TitleSelectTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_select_theme"
+        android:textSize="@dimen/text_select_theme_size_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+    android:id="@+id/RadioButtons"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/TitleSelectTheme" >
+
+    <com.google.android.material.radiobutton.MaterialRadioButton
+        android:id="@+id/RadioButtonMarsTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_mars_theme" />
+
+    <com.google.android.material.radiobutton.MaterialRadioButton
+        android:id="@+id/RadioButtonMoonTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_moon_theme" />
+</RadioGroup>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

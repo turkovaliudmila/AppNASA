@@ -1,11 +1,9 @@
 package ru.geekbrains.appnasa.material.ui.picture
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -16,6 +14,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 import ru.geekbrains.appnasa.R
 import ru.geekbrains.appnasa.databinding.MainFragmentBinding
+import ru.geekbrains.appnasa.material.ui.MainActivity
 import ru.geekbrains.appnasa.material.util.showSnackBar
 
 
@@ -53,6 +52,32 @@ class PictureOfTheDayFragment : Fragment() {
             })
         }
         setBottomSheetBehavior(binding.bottomSheet.bottomSheetContainer)
+        setBottomAppBar(view)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_bottom_bar, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.app_bar_settings -> {
+                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.container, SettingsFragment())?.addToBackStack(null)?.commit()
+            }
+            android.R.id.home -> {
+                activity?.let {
+                    BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun setBottomAppBar(view: View) {
+        val context = activity as MainActivity
+        context.setSupportActionBar(view.findViewById(R.id.bottom_app_bar))
+        setHasOptionsMenu(true)
     }
 
     private fun renderData(data: PictureOfTheDayData) {
@@ -104,6 +129,15 @@ class PictureOfTheDayFragment : Fragment() {
         Toast.makeText(context, string, Toast.LENGTH_SHORT).apply {
             setGravity(Gravity.BOTTOM, 0, 250)
             show()
+        }
+    }
+
+    fun Fragment.replaceFragment(fragment: Fragment) {
+        activity?.supportFragmentManager?.apply {
+            beginTransaction()
+                .add(R.id.container, fragment)
+                .addToBackStack("Settings")
+                .commitNow()
         }
     }
 

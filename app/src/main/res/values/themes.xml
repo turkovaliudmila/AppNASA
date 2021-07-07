@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.AppNASA" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="ThemeAppNASA" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -12,5 +12,28 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="textColorConnected">@color/green</item>
+        <item name="textColorDisConnected">@color/light_gray</item>
     </style>
+
+    <style name="MarsTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/bordo</item>
+        <item name="colorPrimaryVariant">@color/dark_bordo</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorAccent">@color/light_bordo</item>
+        <item name="textColorConnected">@color/white</item>
+        <item name="textColorDisConnected">@color/light_gray</item>
+        <item name="themeColorPrimary">@color/bordo</item>
+    </style>
+
+    <style name="MoonTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorAccent">@color/light_yellow</item>
+        <item name="colorPrimaryDark">@color/dark_yellow</item>
+        <item name="textColorConnected">@color/black</item>
+        <item name="textColorDisConnected">@color/light_gray</item>
+        <item name="themeColorPrimary">@color/yellow</item>
+    </style>
+
 </resources>
