@@ -28,7 +28,6 @@
         android:layout_marginTop="@dimen/bottom_sheet_description_header_margin_top"
         android:paddingStart="@dimen/bottom_sheet_description_header_left_margin"
         android:paddingEnd="@dimen/bottom_sheet_description_header_right_margin"
-        android:textColor="@color/bottom_sheet_description_header_text_color"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
