@@ -11,15 +11,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-
 import ru.geekbrains.appnasa.R
-import ru.geekbrains.appnasa.databinding.MainFragmentBinding
+import ru.geekbrains.appnasa.databinding.MainFragmentStartBinding
 import ru.geekbrains.appnasa.material.ui.MainActivity
 import ru.geekbrains.appnasa.material.util.showSnackBar
 
 
 class PictureOfTheDayFragment : Fragment() {
-    private var _binding: MainFragmentBinding? = null
+    private var _binding: MainFragmentStartBinding? = null
     private val binding get() = _binding!!
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
@@ -29,7 +28,7 @@ class PictureOfTheDayFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = MainFragmentBinding.inflate(layoutInflater)
+        _binding = MainFragmentStartBinding.inflate(layoutInflater)
         return binding.root
     }
 
