@@ -1,7 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="ru.geekbrains.appnasa.material.ui.MainActivity" />
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        tools:context="ru.geekbrains.appnasa.material.ui.MainActivity" />
+
+    <FrameLayout
+        android:id="@+id/transparent_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:background="@android:color/white"
+        android:clickable="false"
+        tools:background="@android:color/transparent" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/container_option_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:orientation="horizontal"
+            android:paddingEnd="@dimen/container_option_padding_end"
+            android:paddingBottom="@dimen/container_option_padding_bottom">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/menu_option_margin_end"
+                android:text="@string/settings"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="@dimen/width_menu_option_icon"
+                android:layout_height="@dimen/width_menu_option_height"
+                android:layout_gravity="bottom|end"
+                app:srcCompat="@drawable/ic_settings" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/container_option_info_about_planets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:orientation="horizontal"
+            android:paddingEnd="@dimen/container_option_padding_end"
+            android:paddingBottom="@dimen/container_option_padding_bottom">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/menu_option_margin_end"
+                android:text="@string/info_about_planets"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="@dimen/width_menu_option_icon"
+                android:layout_height="@dimen/width_menu_option_height"
+                android:layout_gravity="center"
+                app:srcCompat="@mipmap/ic_earth" />
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="@dimen/fab_margin_end"
+            android:layout_marginBottom="@dimen/fab_margin_bottom"
+            android:elevation="@dimen/fab_elevation" />
+
+        <ImageView
+            android:id="@+id/plus_imageview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="@dimen/image_fab_margin_end"
+            android:layout_marginBottom="@dimen/image_fab_margin_bottom"
+            android:elevation="@dimen/image_fab_elevation"
+            app:srcCompat="@drawable/ic_add" />
+    </FrameLayout>
+
+</FrameLayout>

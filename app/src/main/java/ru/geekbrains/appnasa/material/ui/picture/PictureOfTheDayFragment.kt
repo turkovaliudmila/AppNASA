@@ -3,7 +3,12 @@ package ru.geekbrains.appnasa.material.ui.picture
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.transition.ChangeBounds
+import android.transition.ChangeImageTransform
+import android.transition.TransitionManager
+import android.transition.TransitionSet
 import android.view.*
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -11,25 +16,25 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-
+import kotlinx.android.synthetic.main.activity_animations_enlarge.*
 import ru.geekbrains.appnasa.R
-import ru.geekbrains.appnasa.databinding.MainFragmentBinding
-import ru.geekbrains.appnasa.material.ui.MainActivity
+import ru.geekbrains.appnasa.databinding.MainFragmentStartBinding
 import ru.geekbrains.appnasa.material.util.showSnackBar
 
-
 class PictureOfTheDayFragment : Fragment() {
-    private var _binding: MainFragmentBinding? = null
+    private var _binding: MainFragmentStartBinding? = null
     private val binding get() = _binding!!
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
     private val viewModel: PictureOfTheDayViewModel by lazy { ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java) }
 
+    private var isExpanded = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = MainFragmentBinding.inflate(layoutInflater)
+        _binding = MainFragmentStartBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -37,6 +42,21 @@ class PictureOfTheDayFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel.getData()
             .observe(viewLifecycleOwner, Observer<PictureOfTheDayData> { renderData(it) })
+        image_view.setOnClickListener {
+            isExpanded = !isExpanded
+            TransitionManager.beginDelayedTransition(
+                    container, TransitionSet()
+                    .addTransition(ChangeBounds())
+                    .addTransition(ChangeImageTransform())
+            )
+
+            val params: ViewGroup.LayoutParams = image_view.layoutParams
+            params.height =
+                    if (isExpanded) ViewGroup.LayoutParams.MATCH_PARENT else ViewGroup.LayoutParams.WRAP_CONTENT
+            image_view.layoutParams = params
+            image_view.scaleType =
+                    if (isExpanded) ImageView.ScaleType.CENTER_CROP else ImageView.ScaleType.FIT_CENTER
+        }
     }
 
     override fun onDestroyView() {
@@ -52,7 +72,7 @@ class PictureOfTheDayFragment : Fragment() {
             })
         }
         setBottomSheetBehavior(binding.bottomSheet.bottomSheetContainer)
-        setBottomAppBar(view)
+        //setBottomAppBar(view)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -60,25 +80,25 @@ class PictureOfTheDayFragment : Fragment() {
         inflater.inflate(R.menu.menu_bottom_bar, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.app_bar_settings -> {
-                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.container, SettingsFragment())?.addToBackStack(null)?.commit()
-            }
-            android.R.id.home -> {
-                activity?.let {
-                    BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
-                }
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when (item.itemId) {
+//            R.id.app_bar_settings -> {
+//                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.container, SettingsFragment())?.addToBackStack(null)?.commit()
+//            }
+//            android.R.id.home -> {
+//                activity?.let {
+//                    BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
+//                }
+//            }
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 
-    private fun setBottomAppBar(view: View) {
-        val context = activity as MainActivity
-        context.setSupportActionBar(view.findViewById(R.id.bottom_app_bar))
-        setHasOptionsMenu(true)
-    }
+//    private fun setBottomAppBar(view: View) {
+//        val context = activity as MainActivity
+//        context.setSupportActionBar(view.findViewById(R.id.bottom_app_bar))
+//        setHasOptionsMenu(true)
+//    }
 
     private fun renderData(data: PictureOfTheDayData) {
         when (data) {
