@@ -1,4 +1,4 @@
-package ru.geekbrains.appnasa.material.ui.picture
+package ru.geekbrains.appnasa.material.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater

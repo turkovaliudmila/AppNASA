@@ -5,6 +5,7 @@
     android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -62,7 +63,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_baseline_file_download_24" />
+                app:srcCompat="@drawable/ic_round_refresh_24" />
         </androidx.constraintlayout.motion.widget.MotionLayout>
     </androidx.core.widget.NestedScrollView>
 
