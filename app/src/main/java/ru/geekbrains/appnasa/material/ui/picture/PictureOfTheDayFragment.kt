@@ -3,7 +3,12 @@ package ru.geekbrains.appnasa.material.ui.picture
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.transition.ChangeBounds
+import android.transition.ChangeImageTransform
+import android.transition.TransitionManager
+import android.transition.TransitionSet
 import android.view.*
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -11,25 +16,24 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-
 import ru.geekbrains.appnasa.R
-import ru.geekbrains.appnasa.databinding.MainFragmentBinding
-import ru.geekbrains.appnasa.material.ui.MainActivity
+import ru.geekbrains.appnasa.databinding.MainFragmentStartBinding
 import ru.geekbrains.appnasa.material.util.showSnackBar
 
-
 class PictureOfTheDayFragment : Fragment() {
-    private var _binding: MainFragmentBinding? = null
+    private var _binding: MainFragmentStartBinding? = null
     private val binding get() = _binding!!
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
     private val viewModel: PictureOfTheDayViewModel by lazy { ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java) }
 
+    private var isExpanded = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = MainFragmentBinding.inflate(layoutInflater)
+        _binding = MainFragmentStartBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -37,6 +41,21 @@ class PictureOfTheDayFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel.getData()
             .observe(viewLifecycleOwner, Observer<PictureOfTheDayData> { renderData(it) })
+        binding.imageView.setOnClickListener {
+            isExpanded = !isExpanded
+            TransitionManager.beginDelayedTransition(
+                    binding.main, TransitionSet()
+                    .addTransition(ChangeBounds())
+                    .addTransition(ChangeImageTransform())
+            )
+
+            val params: ViewGroup.LayoutParams = binding.main.layoutParams
+            params.height =
+                    if (isExpanded) ViewGroup.LayoutParams.MATCH_PARENT else ViewGroup.LayoutParams.WRAP_CONTENT
+            binding.imageView.layoutParams = params
+            binding.imageView.scaleType =
+                    if (isExpanded) ImageView.ScaleType.CENTER_CROP else ImageView.ScaleType.FIT_CENTER
+        }
     }
 
     override fun onDestroyView() {
@@ -51,8 +70,12 @@ class PictureOfTheDayFragment : Fragment() {
                 data = Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
             })
         }
-        setBottomSheetBehavior(binding.bottomSheet.bottomSheetContainer)
-        setBottomAppBar(view)
+//        activity?.let {
+//            binding.explanationTextView.textView.typeface = Typeface.createFromAsset(it.assets, "falling-sky-font/FallingSkyBlackOblique-j37y.otf")
+//        }
+
+//        setBottomSheetBehavior(binding.bottomSheet.bottomSheetContainer)
+//        setBottomAppBar(view)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -60,25 +83,25 @@ class PictureOfTheDayFragment : Fragment() {
         inflater.inflate(R.menu.menu_bottom_bar, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.app_bar_settings -> {
-                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.container, SettingsFragment())?.addToBackStack(null)?.commit()
-            }
-            android.R.id.home -> {
-                activity?.let {
-                    BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
-                }
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when (item.itemId) {
+//            R.id.app_bar_settings -> {
+//                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.container, SettingsFragment())?.addToBackStack(null)?.commit()
+//            }
+//            android.R.id.home -> {
+//                activity?.let {
+//                    BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
+//                }
+//            }
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 
-    private fun setBottomAppBar(view: View) {
-        val context = activity as MainActivity
-        context.setSupportActionBar(view.findViewById(R.id.bottom_app_bar))
-        setHasOptionsMenu(true)
-    }
+//    private fun setBottomAppBar(view: View) {
+//        val context = activity as MainActivity
+//        context.setSupportActionBar(view.findViewById(R.id.bottom_app_bar))
+//        setHasOptionsMenu(true)
+//    }
 
     private fun renderData(data: PictureOfTheDayData) {
         when (data) {
@@ -101,8 +124,10 @@ class PictureOfTheDayFragment : Fragment() {
                         error(R.drawable.ic_baseline_file_download_off_24)
                         placeholder(R.drawable.ic_baseline_file_download_24)
                     }
+
                     binding.bottomSheet.bottomSheetDescription.text = explanation
                     binding.bottomSheet.bottomSheetDescriptionHeader.text = title
+//                    binding.explanationTextView.textView.text = explanation
                 }
             }
             is PictureOfTheDayData.Loading -> {
