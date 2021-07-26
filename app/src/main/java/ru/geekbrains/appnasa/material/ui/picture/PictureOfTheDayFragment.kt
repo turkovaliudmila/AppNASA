@@ -16,7 +16,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import kotlinx.android.synthetic.main.activity_animations_enlarge.*
 import ru.geekbrains.appnasa.R
 import ru.geekbrains.appnasa.databinding.MainFragmentStartBinding
 import ru.geekbrains.appnasa.material.util.showSnackBar
@@ -42,19 +41,19 @@ class PictureOfTheDayFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel.getData()
             .observe(viewLifecycleOwner, Observer<PictureOfTheDayData> { renderData(it) })
-        image_view.setOnClickListener {
+        binding.imageView.setOnClickListener {
             isExpanded = !isExpanded
             TransitionManager.beginDelayedTransition(
-                    container, TransitionSet()
+                    binding.main, TransitionSet()
                     .addTransition(ChangeBounds())
                     .addTransition(ChangeImageTransform())
             )
 
-            val params: ViewGroup.LayoutParams = image_view.layoutParams
+            val params: ViewGroup.LayoutParams = binding.main.layoutParams
             params.height =
                     if (isExpanded) ViewGroup.LayoutParams.MATCH_PARENT else ViewGroup.LayoutParams.WRAP_CONTENT
-            image_view.layoutParams = params
-            image_view.scaleType =
+            binding.imageView.layoutParams = params
+            binding.imageView.scaleType =
                     if (isExpanded) ImageView.ScaleType.CENTER_CROP else ImageView.ScaleType.FIT_CENTER
         }
     }
@@ -71,8 +70,12 @@ class PictureOfTheDayFragment : Fragment() {
                 data = Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
             })
         }
-        setBottomSheetBehavior(binding.bottomSheet.bottomSheetContainer)
-        //setBottomAppBar(view)
+//        activity?.let {
+//            binding.explanationTextView.textView.typeface = Typeface.createFromAsset(it.assets, "falling-sky-font/FallingSkyBlackOblique-j37y.otf")
+//        }
+
+//        setBottomSheetBehavior(binding.bottomSheet.bottomSheetContainer)
+//        setBottomAppBar(view)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -108,7 +111,7 @@ class PictureOfTheDayFragment : Fragment() {
                 val title = serverResponseData.title
                 val explanation = serverResponseData.explanation
                 binding.main.visibility = View.VISIBLE
-                binding.includedLoadingLayout.loadingLayout.visibility = View.GONE
+//                binding.includedLoadingLayout.loadingLayout.visibility = View.GONE
                 if (url.isNullOrEmpty()) {
 
                     binding.main.showSnackBar(
@@ -121,8 +124,10 @@ class PictureOfTheDayFragment : Fragment() {
                         error(R.drawable.ic_baseline_file_download_off_24)
                         placeholder(R.drawable.ic_baseline_file_download_24)
                     }
+
                     binding.bottomSheet.bottomSheetDescription.text = explanation
                     binding.bottomSheet.bottomSheetDescriptionHeader.text = title
+//                    binding.explanationTextView.textView.text = explanation
                 }
             }
             is PictureOfTheDayData.Loading -> {

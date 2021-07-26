@@ -37,9 +37,17 @@ class PictureOfTheEarthViewModel (
                         call: Call<Array<PictureOfEarth>>,
                         response: Response<Array<PictureOfEarth>>
                 ) {
-                    if (response.isSuccessful && response.body() != null) {
+                    if (response.isSuccessful && response.body() != null && (response.body() is Array<PictureOfEarth>)) {
+                        val countItems = response.body()?.size?.minus(1)
+                        val resultArray: ArrayList<PictureOfTheEarthItem> = ArrayList()
+                        val apiKey: String = BuildConfig.NASA_API_KEY
+                        for (i in 1..countItems!!) {
+                            val imageName = response.body()!!.get(i).image
+                            val url = "https://api.nasa.gov/EPIC/archive/natural/$yesterday/jpg/$imageName.jpg?api_key=$apiKey"
+                            resultArray.add(PictureOfTheEarthItem(url))
+                        }
                         liveDataForViewToObserve.value =
-                                PictureOfTheEarthData.Success(response.body()!!)
+                                PictureOfTheEarthData.Success(resultArray.toList())
                     } else {
                         val message = response.message()
                         if (message.isNullOrEmpty()) {

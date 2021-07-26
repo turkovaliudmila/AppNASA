@@ -39,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginEnd="@dimen/menu_option_margin_end"
+                android:fontFamily="@font/audiowide"
                 android:text="@string/settings"
                 android:textStyle="bold" />
 
@@ -63,6 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginEnd="@dimen/menu_option_margin_end"
+                android:fontFamily="@font/audiowide"
                 android:text="@string/info_about_planets"
                 android:textStyle="bold" />
 

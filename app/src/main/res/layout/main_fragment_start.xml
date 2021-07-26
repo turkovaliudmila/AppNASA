@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<!--    <androidx.core.widget.NestedScrollView-->
+<!--        android:id="@+id/container"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
 
         <androidx.constraintlayout.motion.widget.MotionLayout
             android:id="@+id/main"
@@ -48,6 +48,7 @@
                     android:id="@+id/input_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/audiowide"
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,12 +64,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_round_refresh_24" />
+
         </androidx.constraintlayout.motion.widget.MotionLayout>
-    </androidx.core.widget.NestedScrollView>
+
+<!--    </androidx.core.widget.NestedScrollView>-->
+
+<!--    <include-->
+<!--        android:id="@+id/explanation_text_view"-->
+<!--        layout="@layout/fragment_main_explanation_text" />-->
 
     <include
         android:id="@+id/included_loading_layout"
         layout="@layout/loading_layout" />
+
+
 
     <include
         android:id="@+id/bottom_sheet"
