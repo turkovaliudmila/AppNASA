@@ -111,7 +111,7 @@ class PictureOfTheDayFragment : Fragment() {
                 val title = serverResponseData.title
                 val explanation = serverResponseData.explanation
                 binding.main.visibility = View.VISIBLE
-//                binding.includedLoadingLayout.loadingLayout.visibility = View.GONE
+                binding.includedLoadingLayout.loadingLayout.visibility = View.GONE
                 if (url.isNullOrEmpty()) {
 
                     binding.main.showSnackBar(
