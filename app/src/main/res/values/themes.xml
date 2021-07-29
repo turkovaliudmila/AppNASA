@@ -38,5 +38,7 @@
         <item name="themeColorPrimary">@color/yellow</item>
     </style>
 
-    <color name="purple_clear_500">#666200EE</color>
+    <style name="ThemeAppNASA.Splash">
+        <item name="android:windowBackground">@drawable/splash_background_drawable</item>
+    </style>
 </resources>
