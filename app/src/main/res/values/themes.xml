@@ -14,6 +14,8 @@
         <!-- Customize your theme here. -->
         <item name="textColorConnected">@color/green</item>
         <item name="textColorDisConnected">@color/light_gray</item>
+
+        <item name="colorAccent">@color/purple_500</item>
     </style>
 
     <style name="MarsTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -36,4 +38,7 @@
         <item name="themeColorPrimary">@color/yellow</item>
     </style>
 
+    <style name="ThemeAppNASA.Splash">
+        <item name="android:windowBackground">@drawable/splash_background_drawable</item>
+    </style>
 </resources>

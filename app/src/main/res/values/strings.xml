@@ -11,4 +11,7 @@
     <string name="text_mars_theme">Mars theme</string>
     <string name="text_moon_theme">Moon theme</string>
     <string name="text_select_theme">Select theme:</string>
+    <string name="photo_of_the_earth">Photo of the Earth</string>
+    <string name="info_about_planets">About Planets</string>
+    <string name="lorem_ipsum">text</string>
 </resources>

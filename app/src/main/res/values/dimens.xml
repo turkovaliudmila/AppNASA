@@ -13,4 +13,16 @@
     <dimen name="bottom_sheet_description_left_margin">10dp</dimen>
     <dimen name="bottom_sheet_description_right_margin">10dp</dimen>
     <dimen name="text_select_theme_size_title">20sp</dimen>
+    <dimen name="image_padding_top">30dp</dimen>
+    <dimen name="menu_option_margin_end">5dp</dimen>
+    <dimen name="container_option_padding_end">32dp</dimen>
+    <dimen name="container_option_padding_bottom">32dp</dimen>
+    <dimen name="width_menu_option_icon">25dp</dimen>
+    <dimen name="width_menu_option_height">25dp</dimen>
+    <dimen name="fab_margin_end">16dp</dimen>
+    <dimen name="fab_margin_bottom">16dp</dimen>
+    <dimen name="fab_elevation">5dp</dimen>
+    <dimen name="image_fab_elevation">10dp</dimen>
+    <dimen name="image_fab_margin_bottom">32dp</dimen>
+    <dimen name="image_fab_margin_end">32dp</dimen>
 </resources>
